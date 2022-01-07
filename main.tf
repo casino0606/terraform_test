@@ -1,16 +1,16 @@
 locals {
   #requirements
-  gaddy_vpcs = ["Management", "Backend", "Frontend", "Secrets"]
-  available_cidrs = ["11.0.0.0/16", "12.0.0.0/16", "13.0.0.0/16", "14.0.0.0/16", "15.0.0.0/16","128.0.0.0/16" ]
-  counter = length(local.gaddy_vpcs)
+  gaddy_vpcs      = ["Management", "Backend", "Frontend", "Secrets"]
+  available_cidrs = ["11.0.0.0/16", "12.0.0.0/16", "13.0.0.0/16", "14.0.0.0/16", "15.0.0.0/16", "128.0.0.0/16"]
+  counter         = length(local.gaddy_vpcs)
 
   #subnet info
-  management_sub = "11.0.1.0/24"
-  frontend_cidr_pub = "12.0.1.0/24"
+  management_sub     = "11.0.1.0/24"
+  frontend_cidr_pub  = "12.0.1.0/24"
   frontend_cidr_priv = "12.0.2.0/24"
-  backend_cidr_priv = "13.0.1.0/24"
-  backend_cidr_nat = "13.0.2.0/24"
-  secrets_cidr_priv = "128.0.1.0/24"
+  backend_cidr_priv  = "13.0.1.0/24"
+  backend_cidr_nat   = "13.0.2.0/24"
+  secrets_cidr_priv  = "128.0.1.0/24"
 
   dns_servers = ["11.0.0.2", "12.0.0.2", "13.0.0.2", "128.0.0.2"]
 }
@@ -18,11 +18,11 @@ locals {
 # Create Company VPC.
 
 resource "aws_vpc" "gaddyorg-vpc" {
-  count = local.counter
-  cidr_block = element(local.available_cidrs, count.index )
+  count                = local.counter
+  cidr_block           = element(local.available_cidrs, count.index)
   enable_dns_hostnames = true
   tags = {
-    Name = element(local.gaddy_vpcs, count.index )
+    Name = element(local.gaddy_vpcs, count.index)
   }
 }
 
@@ -46,6 +46,6 @@ resource "aws_internet_gateway" "management_gw" {
 resource "aws_internet_gateway" "frontend_gw" {
   vpc_id = data.aws_vpc.frontend.id
   tags = {
-     Name = "Frontend_GW"
+    Name = "Frontend_GW"
   }
 }
