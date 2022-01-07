@@ -25,10 +25,10 @@ locals {
 
 resource "aws_vpc" "gaddyorg-vpc" {
   count = local.counter
-  cidr_block = "${element(local.availalbe_cidrs, count.index )}"
+  cidr_block = element(local.availalbe_cidrs, count.index )
   enable_dns_hostnames = true
   tags = {
-    Name = "${element(local.gaddy_vpcs, count.index )}"
+    Name = element(local.gaddy_vpcs, count.index )
   }
 }
 
