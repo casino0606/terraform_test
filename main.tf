@@ -50,3 +50,4 @@ resource "aws_internet_gateway" "frontend_gw" {
   }
 }
 # This is a test message.
+# From test branch2
