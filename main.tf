@@ -49,3 +49,4 @@ resource "aws_internet_gateway" "frontend_gw" {
     Name = "Frontend_GW"
   }
 }
+# This is a test message.
